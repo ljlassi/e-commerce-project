@@ -15,6 +15,7 @@ use App\Form\Type\UserFormType;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
 {
@@ -28,9 +29,24 @@ class UserController extends AbstractController
         $user = new User();
 
         $form = $this->createForm(UserFormType::class, $user);
-        $form = $form->createView();
 
-        return new Response($twig->render('user/register_user.html.twig', ['form' => $form]));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return new Response('Saved new user named: ' . $user->getUserName());
+
+        }
+        else {
+            $form = $form->createView();
+
+            return new Response($twig->render('user/register_user.html.twig', ['form' => $form]));
+        }
     }
 
 }
