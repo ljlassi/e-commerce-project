@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Type\ProductFormType;
-use App\Form\Type\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
