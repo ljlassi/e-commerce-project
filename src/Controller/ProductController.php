@@ -48,4 +48,21 @@ class ProductController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/products/list", name="list_products")
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+
+    public function listAllProducts(EntityManagerInterface $entityManager, Environment $twig) : Response {
+        $products = $entityManager->getRepository(Product::class)->findAll();
+
+        return new Response($twig->render("products/list_products.html.twig", ['products' => $products]));
+    }
+
 }
