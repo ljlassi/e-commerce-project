@@ -2,4 +2,4 @@ Project with Symfony PHP framework, trying to create an e-commerce application o
 
 CURRENT FUNCTIONALITY:
 
-Can register, log in and authenticate users, provides access to admin section only for admins. Can add products.
+Can register, log in and authenticate users, provides access to admin section only for admins. Can add and display products. Can add and remove products from featured products, which are displayed on front page.
