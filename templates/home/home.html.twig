@@ -3,8 +3,19 @@
     Welcome to my project!
 {% endblock %}
 {% block body %}
-<h2>Welcome to Store X!</h2>
-    <p><a href="{{ path('list_products') }}">See the products</a></p>
+    <h1>Welcome to Store X!</h1>
+
+    <h2>Featured products</h2>
+    <table class="table">
+        {% for product in products %}
+            <tr>
+                <td>Product: {{ product.name }}</td>
+                <td>Product price:{{ product.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{{ path('list_products') }}">See all products</a></p>
     <p><a href="{{ path('admin') }}">Access admin view</a></p>
     <p><a href="{{ path('app_login') }}">Log in</a></p>
     <p><a href="{{ path('app_register') }}">Register</a></p>
