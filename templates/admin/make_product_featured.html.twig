@@ -10,7 +10,7 @@
                 <td>Product: {{ product.name }}</td>
                 <td>Product price:{{ product.price }}</td>
                 {% if product.featured %}
-                    <td>Remove from featured products</td>
+                    <td><a href="{{ path('unfeature_product') }}?id={{ product.id }}">Remove from featured products</a></td>
                 {% else %}
                     <td><a href="{{ path('make_product_featured') }}?id={{ product.id }}">Add to featured products</a></td>
                 {% endif %}

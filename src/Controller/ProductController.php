@@ -96,7 +96,25 @@ class ProductController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($product);
         $entityManager->flush();
-        return new Response('Made product named: ' . $product->getName() . ' - featured');
+        return new Response('Made product named: ' . $product->getName() . ' - featured.');
+    }
+
+    /**
+     * @Route("/admin/products/featured/unfeature", name="unfeature_product")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+
+    public function makeProductNotFeatured(EntityManagerInterface $entityManager, Request $request) : Response {
+        $id = $request->query->get('id');
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($id);
+        $product->setFeatured(false);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($product);
+        $entityManager->flush();
+        return new Response('Removed product named: ' . $product->getName() . ' - from featured products.');
     }
 
 }
