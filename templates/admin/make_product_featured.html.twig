@@ -12,7 +12,7 @@
                 {% if product.featured %}
                     <td>Remove from featured products</td>
                 {% else %}
-                    <td>Add to featured products</td>
+                    <td><a href="{{ path('make_product_featured') }}?id={{ product.id }}">Add to featured products</a></td>
                 {% endif %}
             </tr>
         {% endfor %}

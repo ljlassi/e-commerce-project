@@ -65,7 +65,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/products/featured", name="make_product_featured")
+     * @Route("/admin/products/featured", name="make_product_featured_view")
      *
      * @param EntityManagerInterface $entityManager
      * @param Environment $twig
@@ -75,9 +75,28 @@ class ProductController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function makeProductFeatured(EntityManagerInterface $entityManager, Environment $twig) : Response {
+    public function makeProductFeaturedView(EntityManagerInterface $entityManager, Environment $twig) : Response {
         $products = $entityManager->getRepository(Product::class)->findAll();
         return new Response($twig->render("admin/make_product_featured.html.twig", ['products' => $products]));
+    }
+
+    /**
+     * @Route("/admin/products/featured/action", name="make_product_featured")
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+
+    public function makeProductFeatured(EntityManagerInterface $entityManager, Request $request) : Response {
+        $id = $request->query->get('id');
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($id);
+        $product->setFeatured(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($product);
+        $entityManager->flush();
+        return new Response('Made product named: ' . $product->getName() . ' - featured');
     }
 
 }
