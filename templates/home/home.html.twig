@@ -11,6 +11,7 @@
             <tr>
                 <td>Product: {{ product.name }}</td>
                 <td>Product price:{{ product.price }}</td>
+                <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
             </tr>
         {% endfor %}
     </table>
