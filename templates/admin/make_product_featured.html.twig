@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Select featured products
+{% endblock %}
+{% block body %}
+
+    <table class="table">
+        {% for product in products %}
+            <tr>
+                <td>Product: {{ product.name }}</td>
+                <td>Product price:{{ product.price }}</td>
+                {% if product.featured %}
+                    <td>Remove from featured products</td>
+                {% else %}
+                    <td>Add to featured products</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{%  endblock %}

@@ -64,4 +64,20 @@ class ProductController extends AbstractController
         return new Response($twig->render("products/list_products.html.twig", ['products' => $products]));
     }
 
+    /**
+     * @Route("/admin/products/featured", name="make_product_featured")
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+
+    public function makeProductFeatured(EntityManagerInterface $entityManager, Environment $twig) : Response {
+        $products = $entityManager->getRepository(Product::class)->findAll();
+        return new Response($twig->render("admin/make_product_featured.html.twig", ['products' => $products]));
+    }
+
 }
