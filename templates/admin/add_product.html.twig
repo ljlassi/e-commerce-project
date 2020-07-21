@@ -4,5 +4,8 @@
 {% endblock %}
 {% block body %}
     <h2>Add product</h2>
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+    {{ form_row(form.image) }}
+    {{ form_end(form) }}
 {% endblock %}

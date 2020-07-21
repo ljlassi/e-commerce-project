@@ -32,6 +32,11 @@ class Product
      */
     private $featured;
 
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $image_file_name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Product
     public function setFeatured(?bool $featured): self
     {
         $this->featured = $featured;
+
+        return $this;
+    }
+
+    public function getImageFileName(): ?string
+    {
+        return $this->image_file_name;
+    }
+
+    public function setImageFileName(?string $image_file_name): self
+    {
+        $this->image_file_name = $image_file_name;
 
         return $this;
     }
