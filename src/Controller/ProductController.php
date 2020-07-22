@@ -15,10 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+/**
+ * Controller for product related actions.
+ *
+ * Class ProductController
+ * @package App\Controller
+ */
+
 class ProductController extends AbstractController
 {
 
     /**
+     * For creating a product. Render product form if product is not submitted,
+     * otherwise process the form and update database.
+     *
      * @Route("/admin/product/add", name="add_product")
      *
      * @param EntityManagerInterface $entityManager
@@ -36,7 +46,7 @@ class ProductController extends AbstractController
             $imageFile = $form->get('image')->getData();
 
             // this condition is needed because the 'image' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+            // so the image file must be processed only when a file is uploaded
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -74,6 +84,8 @@ class ProductController extends AbstractController
     }
 
     /**
+     * Render the view that lists all products.
+     *
      * @Route("/products/list", name="list_products")
      *
      * @param EntityManagerInterface $entityManager
@@ -91,6 +103,8 @@ class ProductController extends AbstractController
     }
 
     /**
+     * Render the view that allows you to make products featured.
+     *
      * @Route("/admin/products/featured", name="make_product_featured_view")
      *
      * @param EntityManagerInterface $entityManager
@@ -107,6 +121,8 @@ class ProductController extends AbstractController
     }
 
     /**
+     * Make a product featured based on ID coming as a GET request
+     *
      * @Route("/admin/products/featured/action", name="make_product_featured")
      *
      * @param EntityManagerInterface $entityManager
@@ -126,6 +142,8 @@ class ProductController extends AbstractController
     }
 
     /**
+     * Make a product not featured, based on the ID coming from a GET request.
+     *
      * @Route("/admin/products/featured/unfeature", name="unfeature_product")
      * @param EntityManagerInterface $entityManager
      * @param Request $request

@@ -11,6 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 
+/**
+ * Type for add product form.
+ *
+ * Class ProductFormType
+ * @package App\Form\Type
+ */
+
 class ProductFormType extends AbstractType
 {
 

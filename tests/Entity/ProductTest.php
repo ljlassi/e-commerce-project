@@ -7,6 +7,13 @@ namespace App\Tests\Entity;
 use App\Entity\Product;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Unit tests for product entity.
+ *
+ * Class ProductTest
+ * @package App\Tests\Entity
+ */
+
 class ProductTest extends TestCase
 {
 

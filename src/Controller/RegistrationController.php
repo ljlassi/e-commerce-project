@@ -13,6 +13,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
+     * For registering a user. If form is not submitted, render the form.
+     * Othwise validate and process the form.
+     *
      * @Route("/register", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response

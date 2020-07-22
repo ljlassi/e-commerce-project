@@ -7,9 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * For now controls login and logout.
+ *
+ * Class SecurityController
+ * @package App\Controller
+ */
+
 class SecurityController extends AbstractController
 {
     /**
+     * Log in user.
+     *
      * @Route("/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -27,6 +36,8 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * Log out user - not in use currently.
+     *
      * @Route("/logout", name="app_logout")
      */
     public function logout()
