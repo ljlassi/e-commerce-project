@@ -28,6 +28,15 @@ class ShoppingCartService
         $this->session->set('shopping_cart_items', $session_products);
     }
 
+    public function removeFromShoppingCart(int $product_id) : void {
+        $session_products = Array();
+        $session_products = $this->session->get('shopping_cart_items');
+        $i = array_search($product_id, $session_products);
+        unset($session_products[$i]);
+        $session_products = array_values($session_products);
+        $this->session->set('shopping_cart_items', $session_products);
+    }
+
     public function getShoppingCart() {
         $session_products = Array();
         $session_products = $this->session->get("shopping_cart_items");

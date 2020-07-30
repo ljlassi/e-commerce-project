@@ -50,4 +50,15 @@ class ShoppingCartController extends AbstractController
         $cart_service->addToShoppingCart($product_id);
         return new Response("Added product to shopping cart");
     }
+
+    /**
+     * @Route("/shopping/cart/remove", name="remove_from_cart")
+     */
+
+    public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
+        $product_id = $request->query->get('id');
+        $cart_service->removeFromShoppingCart($product_id);
+        return new Response("Removed product from shopping cart");
+    }
+
 }
