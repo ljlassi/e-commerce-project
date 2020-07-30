@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shopping cart{% endblock %}
+
+{% block body %}
+    <h2>Items in shopping cart</h2>
+    <table class="table">
+        {% for product in products %}
+            <tr>
+                <td>Product: {{ product.name }}</td>
+                <td>Product price:{{ product.price }}</td>
+                <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
