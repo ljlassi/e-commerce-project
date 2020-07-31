@@ -9,11 +9,15 @@
             <tr>
                 <td>Product: {{ product.name }}</td>
                 <td>Product price:{{ product.price }}</td>
+                <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
                 {% if product.featured %}
                     <td><a href="{{ path('unfeature_product') }}?id={{ product.id }}">Remove from featured products</a></td>
                 {% else %}
                     <td><a href="{{ path('make_product_featured') }}?id={{ product.id }}">Add to featured products</a></td>
                 {% endif %}
+            </tr>
+            <tr>
+                <td><a href="{{ path("edit_product") }}?id={{ product.id }}">Edit product</a></td>
             </tr>
         {% endfor %}
     </table>

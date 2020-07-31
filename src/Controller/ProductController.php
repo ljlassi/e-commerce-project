@@ -84,6 +84,68 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/admin/product/edit", name="edit_product")
+     *
+     * @param Environment $twig
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param SluggerInterface $slugger
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+
+    public function editProduct(Environment $twig, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger) : Response {
+        $product = new Product();
+        $product_id = $request->query->get("id");
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($product_id);
+        $form = $this->createForm(ProductFormType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            // this condition is needed because the 'image' field is not required
+            // so the image file must be processed only when a file is uploaded
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where images are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'imageFilename' property to store the PDF file name
+                // instead of its contents
+                $product->setImageFilename($newFilename);
+            }
+            $product = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            return new Response('Updated product named: ' . $product->getName());
+
+        }
+        else {
+            $form = $form->createView();
+
+            return new Response($twig->render('admin/add_product.html.twig', ['form' => $form]));
+        }
+    }
+
+    /**
      * Render the view that lists all products.
      *
      * @Route("/products/list", name="list_products")
@@ -105,7 +167,7 @@ class ProductController extends AbstractController
     /**
      * Render the view that allows you to make products featured.
      *
-     * @Route("/admin/products/featured", name="make_product_featured_view")
+     * @Route("/admin/products/edit/view", name="edit_product_view")
      *
      * @param EntityManagerInterface $entityManager
      * @param Environment $twig
@@ -115,9 +177,9 @@ class ProductController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function makeProductFeaturedView(EntityManagerInterface $entityManager, Environment $twig) : Response {
+    public function editProductView(EntityManagerInterface $entityManager, Environment $twig) : Response {
         $products = $entityManager->getRepository(Product::class)->findAll();
-        return new Response($twig->render("admin/make_product_featured.html.twig", ['products' => $products]));
+        return new Response($twig->render("admin/edit_product.html.twig", ['products' => $products]));
     }
 
     /**

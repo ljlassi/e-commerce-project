@@ -42,7 +42,7 @@ class ProductFormType extends AbstractType
         ])
             // ...
         ;
-        $builder->add('add', SubmitType::class);
+        $builder->add('submit', SubmitType::class);
     }
 
 }
