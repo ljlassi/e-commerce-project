@@ -6,11 +6,14 @@ Products listing
 
 <table class="table">
     {% for product in products %}
-    <tr>
-        <td>Product: {{ product.name }}</td>
-        <td>Product price:{{ product.price }}</td>
-        <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
-    </tr>
+        <tr>
+            <td>Product: {{ product.name }}</td>
+            <td>Product price:{{ product.price }}</td>
+            <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
+        </tr>
+        <tr>
+            <td><a href="{{ path('add_to_cart') }}/?id={{ product.id }}">Add to cart</a></td>
+        </tr>
     {% endfor %}
 </table>
 
