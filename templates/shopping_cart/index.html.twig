@@ -3,6 +3,8 @@
 {% block title %}Shopping cart{% endblock %}
 
 {% block body %}
+    <div id="result">
+    </div>
     {% if products is defined %}
         <h2>Items in shopping cart</h2>
         <table class="table">
@@ -13,11 +15,29 @@
                     <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
                 </tr>
                 <tr>
-                    <td><a href="{{ path("remove_from_cart") }}/?id={{ product.id }}">Remove from cart</a></td>
+                    <td><button onclick="remove_from_cart({{ product.id }})">Remove from cart</button></td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
         <h2>Shopping cart is empty</h2>
     {% endif %}
+{% endblock %}
+{% block javascripts %}
+<script>
+    function remove_from_cart(product_id) {
+        var url = "{{ path("remove_from_cart") }}" +"?id=" + product_id;
+        $.ajax({
+            url: url, success: function (result) {
+                process_result(result)
+            }
+        });
+    }
+
+    function process_result(result) {
+        $("#result").html(result)
+        setTimeout(function() {
+            location.reload(); }, 500);
+    }
+</script>
 {% endblock %}
