@@ -3,7 +3,8 @@
 Products listing
 {% endblock %}
 {% block body %}
-
+<div id="result">
+</div>
 <table class="table">
     {% for product in products %}
         <tr>
@@ -12,9 +13,27 @@ Products listing
             <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
         </tr>
         <tr>
-            <td><a href="{{ path('add_to_cart') }}/?id={{ product.id }}">Add to cart</a></td>
+            <td><button onclick="add_to_cart({{ product.id }})">Add to cart</button></td>
         </tr>
     {% endfor %}
 </table>
 
 {%  endblock %}
+{% block javascripts %}
+    <script>
+        function add_to_cart(product_id) {
+            var url = "{{ path("add_to_cart") }}" +"?id=" + product_id;
+            $.ajax({
+                url: url, success: function (result) {
+                    process_result(result)
+                }
+            });
+        }
+
+        function process_result(result) {
+            $("#result").html(result)
+            setTimeout(function() {
+                location.reload(); }, 1500);
+        }
+    </script>
+{% endblock %}
