@@ -136,7 +136,7 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return new Response('Updated product named: ' . $product->getName());
+            return $this->redirectToRoute('edit_product_view', ['message' => 'Successfully a updated product.']);
 
         }
         else {

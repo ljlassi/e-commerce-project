@@ -6,6 +6,9 @@
 
 
     <div id="result">
+        {% if app.request.get('message') is defined %}
+            {{ app.request.get('message') }}
+        {% endif %}
     </div>
     <div id="edit-product-form">
     </div>
