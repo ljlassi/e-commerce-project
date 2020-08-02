@@ -4,6 +4,12 @@
 {% endblock %}
 {% block body %}
 
+
+    <div id="result">
+    </div>
+    <div id="edit-product-form">
+    </div>
+
     <table class="table">
         {% for product in products %}
             <tr>
@@ -11,18 +17,17 @@
                 <td>Product price:{{ product.price }}</td>
                 <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
                 {% if product.featured %}
-                    <td><button onclick="unfeature_product({{ product.id }})">Remove from featured products</button></td>
+                    <td><button class="btn btn-danger" onclick="unfeature_product({{ product.id }})">Remove from featured products</button></td>
                 {% else %}
-                    <td><button onclick="make_product_featured({{ product.id }})">Make product featured</button></td>
+                    <td><button class="btn btn-secondary" onclick="make_product_featured({{ product.id }})">Make product featured</button></td>
                 {% endif %}
             </tr>
             <tr>
-                <td><a href="{{ path("edit_product") }}?id={{ product.id }}">Edit product</a></td>
+                {# <td><a href="{{ path("edit_product") }}?id={{ product.id }}">Edit product</a></td> #}
+                <td><button class="btn btn-primary" onclick="edit_product({{ product.id }})">Edit product</button></td>
             </tr>
         {% endfor %}
     </table>
-    <div id="result">
-    </div>
 
 {%  endblock %}
 
@@ -46,10 +51,23 @@
         });
     }
 
+    function edit_product(product_id) {
+        var url = "{{ path("edit_product") }}" +"?id=" + product_id;
+        $.ajax({
+            url: url, success: function (result) {
+                process_form(result)
+            }
+        });
+    }
+
     function process_result(result) {
         $("#result").html(result)
         setTimeout(function() {
             location.reload(); }, 1500);
+    }
+
+    function process_form(result) {
+        $("#edit-product-form").html(result);
     }
 </script>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
+use App\Form\Type\EditProductFormType;
 use App\Form\Type\ProductFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -84,7 +85,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/edit", name="edit_product")
+     * @Route("/admin/products/edit", name="edit_product")
      *
      * @param Environment $twig
      * @param Request $request
@@ -101,7 +102,7 @@ class ProductController extends AbstractController
         $product_id = $request->query->get("id");
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $product = $repository->find($product_id);
-        $form = $this->createForm(ProductFormType::class, $product);
+        $form = $this->createForm(EditProductFormType::class, $product);
 
         $form->handleRequest($request);
 
@@ -140,8 +141,8 @@ class ProductController extends AbstractController
         }
         else {
             $form = $form->createView();
-
-            return new Response($twig->render('admin/add_product.html.twig', ['form' => $form]));
+            $action = $this->generateUrl('edit_product', ['id' => $product_id]);
+            return new Response($twig->render('admin/edit_product_form.html.twig', ['form' => $form, 'action' => $action]));
         }
     }
 
@@ -177,7 +178,7 @@ class ProductController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function editProductView(EntityManagerInterface $entityManager, Environment $twig) : Response {
+    public function editProductView(EntityManagerInterface $entityManager, Environment $twig, Request $request) : Response {
         $products = $entityManager->getRepository(Product::class)->findAll();
         return new Response($twig->render("admin/edit_product.html.twig", ['products' => $products]));
     }
