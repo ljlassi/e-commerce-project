@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShoppingCartController extends AbstractController
 {
     /**
+     * Render shopping cart, if there are items in cart (stored in session), render them, otherwise tell that the cart is empty.
+     *
      * @Route("/shopping/cart", name="shopping_cart")
      * @param ShoppingCartService $cart_service
      * @param EntityManagerInterface $entityManager
@@ -38,6 +40,8 @@ class ShoppingCartController extends AbstractController
     }
 
     /**
+     * Add produc to shopping cart
+     *
      * @Route("shopping/cart/add", name="add_to_cart")
      *
      * @param Request $request
@@ -52,6 +56,8 @@ class ShoppingCartController extends AbstractController
     }
 
     /**
+     * Remove item from shopping cart
+     *
      * @Route("/shopping/cart/remove", name="remove_from_cart")
      */
 

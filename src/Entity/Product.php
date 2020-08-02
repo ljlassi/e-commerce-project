@@ -78,6 +78,10 @@ class Product
         return $this;
     }
 
+    /**
+     * Images are stored as string filenames in database. The image actual is retrieved at a template level.
+     */
+
     public function getImageFileName(): ?string
     {
         return $this->image_file_name;

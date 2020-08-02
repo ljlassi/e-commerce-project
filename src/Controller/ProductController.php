@@ -61,10 +61,10 @@ class ProductController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    echo $e->getMessage();
                 }
 
-                // updates the 'imageFilename' property to store the PDF file name
+                // updates the 'imageFilename' property to store the image file name
                 // instead of its contents
                 $product->setImageFilename($newFilename);
             }
@@ -86,6 +86,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/admin/products/edit", name="edit_product")
+     *
+     * Edit a product. Render form if form is not submitted, otherwise process form and update product information.
      *
      * @param Environment $twig
      * @param Request $request
@@ -123,10 +125,10 @@ class ProductController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    echo $e->getMessage();
                 }
 
-                // updates the 'imageFilename' property to store the PDF file name
+                // updates the 'imageFilename' property to store the image file name
                 // instead of its contents
                 $product->setImageFilename($newFilename);
             }
@@ -136,7 +138,7 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('edit_product_view', ['message' => 'Successfully a updated product.']);
+            return $this->redirectToRoute('edit_product_view', ['message' => 'Successfully updated a product.']);
 
         }
         else {

@@ -3,6 +3,12 @@
 
 namespace App\Entity;
 
+/**
+ * NOT IN USE CURRENTLY. Saved for possible future use, for now...
+ *
+ * Class ShoppingCartItem
+ * @package App\Entity
+ */
 
 class ShoppingCartItem
 {

@@ -1,4 +1,12 @@
 {% extends "base.html.twig" %}
+{# Edit product view. List products for editing, and allow editing them. Only admin users get to this view.
+Editing works by pressing the "edit product" button. It gets the form with pre-filled values from a controller
+through jQuery Ajax. You then submit the form, the product is updated in the database and you return to this view
+with a success message.
+
+You can also make produts featured or remove them from featured products, also works with ajax.
+
+#}
 {% block title %}
     Edit products
 {% endblock %}
@@ -6,6 +14,7 @@
 
 
     <div id="result">
+        {# Display success or other message coming from a controller. #}
         {% if app.request.get('message') is defined %}
             {{ app.request.get('message') }}
         {% endif %}
@@ -14,6 +23,7 @@
     </div>
 
     <table class="table">
+        {# loop through products array. Lists products and options for editing. #}
         {% for product in products %}
             <tr>
                 <td>Product: {{ product.name }}</td>
@@ -26,7 +36,6 @@
                 {% endif %}
             </tr>
             <tr>
-                {# <td><a href="{{ path("edit_product") }}?id={{ product.id }}">Edit product</a></td> #}
                 <td><button class="btn btn-primary" onclick="edit_product({{ product.id }})">Edit product</button></td>
             </tr>
         {% endfor %}
@@ -36,6 +45,13 @@
 
 {% block javascripts %}
 <script>
+
+    /**
+     * Ajax stuff here for controller actions related to this view/template.
+     *
+     * Using jQuery.
+     */
+
     function make_product_featured(product_id) {
         var url = "{{ path("make_product_featured") }}" +"?id=" + product_id;
         $.ajax({

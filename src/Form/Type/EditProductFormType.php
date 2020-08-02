@@ -11,8 +11,23 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 
+/**
+ * Builds edit product form.
+ *
+ * Class EditProductFormType
+ * @package App\Form\Type
+ */
+
 class EditProductFormType extends AbstractType
 {
+
+    /**
+     * Build form for editing product.
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $builder->setAction("./");

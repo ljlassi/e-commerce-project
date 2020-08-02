@@ -22,6 +22,13 @@ use Symfony\Component\Validator\Constraints\File;
 class ProductFormType extends AbstractType
 {
 
+    /**
+     * Build add product form.
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
         ;
         $builder->add('name', TextType::class);
