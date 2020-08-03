@@ -26,10 +26,26 @@ class ShoppingCartController extends AbstractController
         $in_cart = $cart_service->getShoppingCart();
         if ($in_cart) {
             $repository = $this->getDoctrine()->getRepository(Product::class);
-            $products = array();
             foreach ($in_cart as $key => $product_id) {
-                $product = $repository->find($product_id);
-                $products[$key] = ["id" => $product->getId(), "name" => $product->getName(), "price" => $product->getPrice(), "imageFileName" => $product->getImageFileName()];
+                $result_keys = array_keys($in_cart, $product_id, true);
+                $item_in_cart = count($result_keys);
+                $product_instances = 0;
+                if (isset($products)) {
+                    foreach($products as $i => $product) {
+                        if ($product['id'] == $product_id) {
+                         $product_instances = $product_instances + 1;
+                        }
+                    }
+                }
+                if ($item_in_cart === 1 || $product_instances === 0) {
+                    $product = $repository->find($product_id);
+                    $products[$key] = ["id" => $product->getId(), "name" => $product->getName(), "price" => $product->getPrice(),
+                        "imageFileName" => $product->getImageFileName(), 'items_in_cart' => 1];
+                    $products[$key]['items_in_cart'] = $item_in_cart;
+                }
+                else {
+                    continue;
+                }
             }
             return $this->render('shopping_cart/index.html.twig', [
                 'products' => $products,

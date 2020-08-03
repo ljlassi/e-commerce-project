@@ -16,7 +16,7 @@
                 <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
             </tr>
             <tr>
-                <td><button onclick="add_to_cart({{ product.id }})">Add to cart</button></td>
+                <td><button class="btn btn-primary" onclick="add_to_cart({{ product.id }})">Add to cart</button></td>
             </tr>
         {% endfor %}
     </table>
