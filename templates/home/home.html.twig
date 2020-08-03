@@ -28,6 +28,9 @@
     <p><a href="{{ path('app_register') }}">Register</a></p>
     <p><a href="{{ path('app_logout') }}">Log out</a></p>
 {%  endblock %}
+{% block footer %}
+    Copyright © 2020 Lassi Jääskeläinen
+{% endblock %}
 {% block javascripts %}
     <script>
         function add_to_cart(product_id) {
