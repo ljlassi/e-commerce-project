@@ -1,1 +1,12 @@
 {% extends "base.html.twig" %}
+{%  block body %}
+    <h2>Change front page banner</h2>
+    <h5>Current front page banner image</h5>
+
+    <h5>Change banner form</h5>
+    {{ form_start(form) }}
+
+    {{ form_row(form.imageUrl) }}
+    {{ form_end(form) }}
+
+{%  endblock %}
