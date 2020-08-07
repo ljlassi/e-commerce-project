@@ -6,18 +6,22 @@ Products listing
 {% block body %}
 <div id="result">
 </div>
-<table class="table">
-    {% for product in products %}
-        <tr>
-            <td>Product: {{ product.name }}</td>
-            <td>Product price:{{ product.price }}</td>
-            <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
-        </tr>
-        <tr>
-            <td><button onclick="add_to_cart({{ product.id }})">Add to cart</button></td>
-        </tr>
-    {% endfor %}
-</table>
+    {% if products is defined %}
+        <table class="table">
+            {% for product in products %}
+                <tr>
+                    <td>Product: {{ product.name }}</td>
+                    <td>Product price:{{ product.price }}</td>
+                    <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
+                </tr>
+                <tr>
+                    <td><button onclick="add_to_cart({{ product.id }})" class="btn btn-primary">Add to cart</button></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>No products added to store yet!</h2>
+    {% endif %}
 
 {%  endblock %}
 {% block javascripts %}
