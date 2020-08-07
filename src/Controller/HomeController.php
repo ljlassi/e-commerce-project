@@ -7,6 +7,7 @@
 namespace App\Controller;
 
 
+use App\Entity\CMSBanner;
 use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +40,9 @@ class HomeController extends AbstractController
         $products = $this->getDoctrine()
             ->getRepository(Product::class)
             ->findFeatured();
-        return new Response($twig->render('/home/home.html.twig', ['products' => $products]));
+        $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
+            ->find(1);
+        return new Response($twig->render('/home/home.html.twig', ['products' => $products, 'cmsBanner' => $cmsBanner]));
     }
 
 }
