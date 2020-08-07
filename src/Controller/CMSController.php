@@ -30,7 +30,11 @@ class CMSController extends AbstractController
 
     public function changeBanner(Environment $twig, Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
-        $cmsBanner = new CMSBanner();
+        $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
+            ->find(1);
+        if(!$cmsBanner->getImageURl()) {
+            $cmsBanner = new CMSBanner();
+        }
         $form = $this->createForm(CMSBannerFormType::class, $cmsBanner);
         $form->handleRequest($request);
 
@@ -70,7 +74,9 @@ class CMSController extends AbstractController
         }
         else {
             $form = $form->createView();
-            return new Response($twig->render('admin/cms/change_banner.html.twig', ['form' => $form]));
+            $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
+                ->find(1);
+            return new Response($twig->render('admin/cms/change_banner.html.twig', ['form' => $form, 'cmsBanner' => $cmsBanner]));
         }
     }
 }

@@ -2,7 +2,7 @@
 {%  block body %}
     <h2>Change front page banner</h2>
     <h5>Current front page banner image</h5>
-
+    <img src="{{ asset('/images/' ~ cmsBanner.imageUrl) }}" alt="{{ cmsBanner.alt }}" class="img-fluid">
     <h5>Change banner form</h5>
     {{ form_start(form) }}
 
