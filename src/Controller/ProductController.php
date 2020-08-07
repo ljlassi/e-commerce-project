@@ -226,4 +226,24 @@ class ProductController extends AbstractController
         return new Response('Removed product named: ' . $product->getName() . ' - from featured products.');
     }
 
+    /**
+     * Remove product from database.
+     *
+     * @Route("/admin/products/remove", name="remove_product")
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+
+    public function deleteProduct(EntityManagerInterface $entityManager, Request $request) : Response {
+        $id = $request->query->get('id');
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($id);
+        $product_name = $product->getName();
+        $entityManager->remove($product);
+        $entityManager->flush();
+        return new Response('Deleted product with name: ' . $product_name);
+    }
+
 }

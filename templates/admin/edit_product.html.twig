@@ -22,24 +22,29 @@ You can also make produts featured or remove them from featured products, also w
     <div id="edit-product-form">
     </div>
 
-    <table class="table">
-        {# loop through products array. Lists products and options for editing. #}
-        {% for product in products %}
-            <tr>
-                <td>Product: {{ product.name }}</td>
-                <td>Product price:{{ product.price }}</td>
-                <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
-                {% if product.featured %}
-                    <td><button class="btn btn-danger" onclick="unfeature_product({{ product.id }})">Remove from featured products</button></td>
-                {% else %}
-                    <td><button class="btn btn-secondary" onclick="make_product_featured({{ product.id }})">Make product featured</button></td>
-                {% endif %}
-            </tr>
-            <tr>
-                <td><button class="btn btn-primary" onclick="edit_product({{ product.id }})">Edit product</button></td>
-            </tr>
-        {% endfor %}
-    </table>
+    {% if products is defined %}
+        <table class="table">
+            {# loop through products array. Lists products and options for editing. #}
+            {% for product in products %}
+                <tr>
+                    <td>Product: {{ product.name }}</td>
+                    <td>Product price:{{ product.price }}</td>
+                    <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
+                    {% if product.featured %}
+                        <td><button class="btn btn-danger" onclick="unfeature_product({{ product.id }})">Remove from featured products</button></td>
+                    {% else %}
+                        <td><button class="btn btn-secondary" onclick="make_product_featured({{ product.id }})">Make product featured</button></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td><button class="btn btn-primary" onclick="edit_product({{ product.id }})">Edit product</button></td>
+                    <td><button class="btn btn-danger" onclick="remove_product({{ product.id }})">Remove product</button></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h4>No products to edit!</h4>
+    {% endif %}
 
 {%  endblock %}
 
@@ -75,6 +80,15 @@ You can also make produts featured or remove them from featured products, also w
         $.ajax({
             url: url, success: function (result) {
                 process_form(result)
+            }
+        });
+    }
+
+    function remove_product(product_id) {
+        var url = "{{ path("remove_product") }}" +"?id=" + product_id;
+        $.ajax({
+            url: url, success: function (result) {
+                process_result(result)
             }
         });
     }
