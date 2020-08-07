@@ -4,6 +4,11 @@
     Add product
 {% endblock %}
 {% block body %}
+    <div id="result_message">
+        {% if message is defined %}
+            {{ message }}
+        {% endif %}
+    </div>
     <h2>Add product</h2>
     {{ form_start(form) }}
 

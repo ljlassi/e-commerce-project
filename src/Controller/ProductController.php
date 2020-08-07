@@ -74,7 +74,14 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return new Response('Saved new product named: ' . $product->getName());
+            // get product name for success message - before we re-initiate the product object
+            $message = 'Saved new product named: ' . $product->getName();
+            // re-render the form, to enable adding further products. Sends success message to template too.
+            $product = new Product();
+            $form = $this->createForm(ProductFormType::class, $product);
+            $form = $form->createView();
+
+            return new Response($twig->render('admin/add_product.html.twig', ['form' => $form, 'message' => $message]));
 
         }
         else {
