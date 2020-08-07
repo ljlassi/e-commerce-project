@@ -69,7 +69,11 @@ class CMSController extends AbstractController
             $entityManager->persist($cmsBanner);
             $entityManager->flush();
 
-            return new Response('Succesfully changed banner image', 200);
+            $form = $form->createView();
+            $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
+                ->find(1);
+
+            return new Response($twig->render('admin/cms/change_banner.html.twig', ['form' => $form, 'cmsBanner' => $cmsBanner, 'message' => 'Successfully changed banner image.']));
 
         }
         else {

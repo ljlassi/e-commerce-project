@@ -1,5 +1,8 @@
 {% extends "base.html.twig" %}
 {%  block body %}
+    <div id="result">
+        {{ message }}
+    </div>
     <h2>Change front page banner</h2>
     <h5>Current front page banner image</h5>
     <img src="{{ asset('/images/' ~ cmsBanner.imageUrl) }}" alt="{{ cmsBanner.alt }}" class="img-fluid">
