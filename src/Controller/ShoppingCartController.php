@@ -17,10 +17,9 @@ class ShoppingCartController extends AbstractController
      *
      * @Route("/shopping/cart", name="shopping_cart")
      * @param ShoppingCartService $cart_service
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function index(ShoppingCartService $cart_service, EntityManagerInterface $entityManager) : Response
+    public function index(ShoppingCartService $cart_service) : Response
     {
         $in_cart = Array();
         $in_cart = $cart_service->getShoppingCart();

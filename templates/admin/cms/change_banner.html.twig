@@ -1,7 +1,9 @@
 {% extends "base.html.twig" %}
 {%  block body %}
     <div id="result">
-        {{ message }}
+        {% if message is defined %}
+            {{ message }}
+        {% endif %}
     </div>
     <h2>Change front page banner</h2>
     <h5>Current front page banner image</h5>

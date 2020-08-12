@@ -70,7 +70,6 @@ class ProductController extends AbstractController
             }
             $product = $form->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -141,7 +140,6 @@ class ProductController extends AbstractController
             }
             $product = $form->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -207,7 +205,6 @@ class ProductController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $product = $repository->find($id);
         $product->setFeatured(true);
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($product);
         $entityManager->flush();
         return new Response('Made product named: ' . $product->getName() . ' - featured.');
@@ -227,7 +224,6 @@ class ProductController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $product = $repository->find($id);
         $product->setFeatured(false);
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($product);
         $entityManager->flush();
         return new Response('Removed product named: ' . $product->getName() . ' - from featured products.');

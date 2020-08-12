@@ -65,7 +65,6 @@ class CMSController extends AbstractController
             }
             $cmsBanner = $form->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cmsBanner);
             $entityManager->flush();
 
