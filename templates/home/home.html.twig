@@ -39,6 +39,7 @@
 {% endblock %}
 {% block javascripts %}
     <script>
+
         function add_to_cart(product_id) {
             var url = "{{ path("add_to_cart") }}" +"?id=" + product_id;
             $.ajax({
