@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Hello from Vue.js!
+{% endblock %}
+{% block body %}
+
+    <div ref="words" data-words="{{ words|join(',') }}">
+
+    </div>
+
+    <div id="app">
+        <example>
+        </example>
+    </div>
+{% endblock %}

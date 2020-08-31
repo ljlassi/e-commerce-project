@@ -11,6 +11,8 @@ Encore
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
+
+    .enableVueLoader()
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -69,8 +71,6 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
-
-    .enableVueLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();

@@ -17,6 +17,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "axios": "^0.20.0"
+        "axios": "^0.20.0",
+        "vue-axios": "^2.1.5"
     }
 }

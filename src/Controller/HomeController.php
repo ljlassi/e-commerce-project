@@ -45,4 +45,19 @@ class HomeController extends AbstractController
         return new Response($twig->render('/home/home.html.twig', ['products' => $products, 'cmsBanner' => $cmsBanner]));
     }
 
+    /**
+     * @Route("/vue/home", name="vue_home")
+     *
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+
+    public function vueHome(Environment $twig) : Response {
+        $words = ['sky', 'cloud', 'wood', 'rock', 'forest',
+            'mountain', 'breeze'];
+        return new Response($twig->render('home/home_vue.html.twig', ['words' => $words]));
+    }
 }
