@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Service\ShoppingCartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,18 +14,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShoppingCartController extends AbstractController
 {
     /**
-     * Render shopping cart, if there are items in cart (stored in session), render them, otherwise tell that the cart is empty.
+     * Render shopping cart view.
      *
      * @Route("/shopping/cart", name="shopping_cart")
      * @param ShoppingCartService $cart_service
      * @return Response
      */
-    public function index(ShoppingCartService $cart_service) : Response
+    public function index() : Response
     {
+        return $this->render('shopping_cart/index.html.twig', []);
+    }
+
+    /**
+     * Return shopping cart items as JSON.
+     *
+     * @Route("shopping/cart/find", name="shopping_cart_find")
+     *
+     * @param Request $request
+     * @param ShoppingCartService $cart_service
+     */
+
+    public function returnShoppingCartAsJSON(ShoppingCartService $cart_service) : Response {
         $in_cart = Array();
         $in_cart = $cart_service->getShoppingCart();
         if ($in_cart) {
             $repository = $this->getDoctrine()->getRepository(Product::class);
+            $products = array();
             foreach ($in_cart as $key => $product_id) {
                 $result_keys = array_keys($in_cart, $product_id, true);
                 $item_in_cart = count($result_keys);
@@ -32,7 +47,7 @@ class ShoppingCartController extends AbstractController
                 if (isset($products)) {
                     foreach($products as $i => $product) {
                         if ($product['id'] == $product_id) {
-                         $product_instances = $product_instances + 1;
+                            $product_instances = $product_instances + 1;
                         }
                     }
                 }
@@ -46,13 +61,13 @@ class ShoppingCartController extends AbstractController
                     continue;
                 }
             }
-            return $this->render('shopping_cart/index.html.twig', [
-                'products' => $products,
-            ]);
+            return new JsonResponse($products);
         }
-
-        return $this->render('shopping_cart/index.html.twig', []);
+        else {
+            return new JsonResponse(false);
+        }
     }
+
 
     /**
      * Add produc to shopping cart

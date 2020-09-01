@@ -4,6 +4,7 @@ import VueAxios from 'vue-axios'
 import Example from './components/Example'
 import Home from './components/Home'
 import ListProducts from "./components/ListProducts";
+import ShoppingCart from "./components/ShoppingCart";
 
 Vue.use(VueAxios, axios)
 new Vue({
@@ -11,6 +12,7 @@ new Vue({
     components: {
         'example' : Example,
         'home' : Home,
-        'list-products' : ListProducts
+        'list-products' : ListProducts,
+        'shopping-cart' : ShoppingCart
     }
 });
