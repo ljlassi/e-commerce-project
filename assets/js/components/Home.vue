@@ -1,6 +1,9 @@
 <template>
     <div>
         <!-- {% if products is defined %} -->
+        <div id="response">
+            <p>{{ controller_response }}</p>
+        </div>
         <h2>Featured products</h2>
         <div v-for="product in products">
             <table class="table">
@@ -19,12 +22,23 @@
         name: "home",
         data () {
             return {
-                products: null
+                products: null,
+                controller_response: null
             }
         },
         methods: {
             add_to_cart: function (id) {
-                alert(id)
+                var url = 'shopping/cart/add/?id=' + id;
+                try {
+                    // this.isLoading = true;
+                    this.axios.get(
+                        url
+                    ).then(response => (this.controller_response = response.data));
+                } catch (err) {
+                    this.isError = true;
+                    console.log("JS error");
+                } finally {
+                }
             },
             load_featured_products: function() {
                 try {
@@ -34,11 +48,9 @@
                     ).then(response => (this.products = response.data));
                 } catch (err) {
                     this.isError = true;
-                    console.log(err);
+                    console.log("JS error");
                 } finally {
                     this.products = JSON.parse(this.products);
-                    console.log("Loaded!");
-                    //this.isLoading = false;
                 }
             }
         },
