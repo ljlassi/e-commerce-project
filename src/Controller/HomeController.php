@@ -37,12 +37,9 @@ class HomeController extends AbstractController
      */
 
     public function homePage(Environment $twig) : Response {
-        $products = $this->getDoctrine()
-            ->getRepository(Product::class)
-            ->findFeatured();
         $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
             ->find(1);
-        return new Response($twig->render('/home/home.html.twig', ['products' => $products, 'cmsBanner' => $cmsBanner]));
+        return new Response($twig->render('/home/home.html.twig', ['cmsBanner' => $cmsBanner]));
     }
 
     /**

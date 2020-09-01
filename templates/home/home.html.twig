@@ -11,23 +11,6 @@
         <home>
         </home>
     </div>
-    {% if products is defined %}
-        <h2>Featured products</h2>
-        <table class="table">
-            {% for product in products %}
-                <tr>
-                    <td>Product: {{ product.name }}</td>
-                    <td>Product price:{{ product.price }}</td>
-                    <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
-                </tr>
-                <tr>
-                    <td><button class="btn btn-primary" onclick="add_to_cart({{ product.id }})">Add to cart</button></td>
-                </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <h4>No featured products set yet</h4>
-    {% endif %}
 
     <p><a href="{{ path('list_products') }}">See all products</a></p>
     <p><a href="{{ path('shopping_cart') }}">Shopping cart</a></p>
@@ -41,20 +24,5 @@
 {% endblock %}
 {% block javascripts %}
     <script>
-
-        function add_to_cart(product_id) {
-            var url = "{{ path("add_to_cart") }}" +"?id=" + product_id;
-            $.ajax({
-                url: url, success: function (result) {
-                    process_result(result)
-                }
-            });
-        }
-
-        function process_result(result) {
-            $("#result").html(result)
-            setTimeout(function() {
-                location.reload(); }, 1500);
-        }
     </script>
 {% endblock %}

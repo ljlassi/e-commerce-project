@@ -10,6 +10,7 @@ use App\Form\Type\ProductFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +26,20 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductController extends AbstractController
 {
+
+    /**
+     * Find featured products.
+     *
+     * @Route("/products/list/featured", name="list_featured_products")
+     */
+
+    public function listFeaturedProducts() : JsonResponse {
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findFeatured();
+        // if you know the data to send when creating the response
+        return new JsonResponse($products);
+    }
 
     /**
      * For creating a product. Render product form if product is not submitted,

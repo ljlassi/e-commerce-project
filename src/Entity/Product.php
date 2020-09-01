@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Product
+class Product implements JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -92,5 +93,15 @@ class Product
         $this->image_file_name = $image_file_name;
 
         return $this;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->getId(),
+            'price' => $this->getPrice(),
+            'name' => $this->getName(),
+            'featured' => $this->getFeatured(),
+            'image_file_name' => $this->getImageFileName()
+        ];
     }
 }
