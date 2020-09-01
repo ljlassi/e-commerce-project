@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- {% if products is defined %} -->
         <div id="response">
             <p>{{ controller_response }}</p>
         </div>
@@ -21,7 +20,7 @@
 </template>
 <script>
     export default {
-        name: "list-products",
+        name: "shopping-cart",
         data () {
             return {
                 products: null,

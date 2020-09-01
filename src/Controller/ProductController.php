@@ -202,7 +202,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * Render the view that allows you to make products featured.
+     * Render the view that allows you to edit products.
      *
      * @Route("/admin/products/edit/view", name="edit_product_view")
      *

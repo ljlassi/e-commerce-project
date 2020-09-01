@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- {% if products is defined %} -->
         <div id="response">
             <p>{{ controller_response }}</p>
         </div>
