@@ -1,4 +1,4 @@
-Project with Symfony PHP framework, creating an e-commerce application over time step by step. Using concepts like ORM, routing with annotations, Symfony authentication, Twig template engine, jQuery Ajax and unit testing.
+Project with Symfony PHP framework (back-end) and Vue.js Javascript framework (front-end). Creating an e-commerce application over time step by step. Using concepts like ORM, routing with annotations, Symfony authentication, Twig template engine, and unit testing.
 
 CURRENT FUNCTIONALITY:
 
