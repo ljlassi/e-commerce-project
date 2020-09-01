@@ -28,7 +28,7 @@
         },
         methods: {
             add_to_cart: function (id) {
-                var url = 'shopping/cart/add/?id=' + id;
+                var url = '/shopping/cart/add/?id=' + id;
                 try {
                     // this.isLoading = true;
                     this.axios.get(

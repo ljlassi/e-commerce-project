@@ -54,7 +54,7 @@
                     console.log("JS error");
                 } finally {
                     this.products = null;
-                    setTimeout(function () { this.loadProducts() }.bind(this), 500)
+                    setTimeout(function () { this.loadProducts() }.bind(this), 1000)
                 }
             }
         },

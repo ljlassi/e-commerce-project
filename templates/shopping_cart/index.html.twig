@@ -3,11 +3,16 @@
 {# Load, display shopping cart (stored in session). Allow removing items from shopping cart (uses ajax).  #}
 
 {% block title %}Shopping cart{% endblock %}
-
+{% block vue_head %}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
 {% block body %}
     <div id="app">
         <shopping-cart>
         </shopping-cart>
     </div>
 
+{% endblock %}
+{% block vue_scripts %}
+    {{ encore_entry_script_tags('main') }}
 {% endblock %}

@@ -2,6 +2,9 @@
 {%  block title %}
     Welcome to my project!
 {% endblock %}
+{% block vue_head %}
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
 {% block body %}
     <h1>Welcome to Store X!</h1>
     {% if cmsBanner is defined %}
@@ -25,4 +28,7 @@
 {% block javascripts %}
     <script>
     </script>
+{% endblock %}
+{% block vue_scripts %}
+    {{ encore_entry_script_tags('main') }}
 {% endblock %}

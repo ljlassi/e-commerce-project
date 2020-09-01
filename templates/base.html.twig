@@ -17,7 +17,8 @@
         {% endblock %}
         {% block stylesheets_head %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            {{ encore_entry_link_tags('main') }}
+        {% endblock %}
+        {% block vue_head %}
         {% endblock %}
     </head>
     <body>
@@ -41,7 +42,6 @@
         {% block javascripts %}
         {% endblock %}
         {% block vue_scripts %}
-            {{ encore_entry_script_tags('main') }}
         {% endblock %}
     </body>
 </html>
