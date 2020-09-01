@@ -30,13 +30,27 @@ class ProductController extends AbstractController
     /**
      * Find featured products.
      *
-     * @Route("/products/list/featured", name="list_featured_products")
+     * @Route("/products/find/featured", name="find_featured_products")
      */
 
-    public function listFeaturedProducts() : JsonResponse {
+    public function findFeaturedProducts() : JsonResponse {
         $products = $this->getDoctrine()
             ->getRepository(Product::class)
             ->findFeatured();
+        // if you know the data to send when creating the response
+        return new JsonResponse($products);
+    }
+
+    /**
+     * Find featured products.
+     *
+     * @Route("/products/find/all", name="find_all_products")
+     */
+
+    public function findAllProducts() : JsonResponse {
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findAll();
         // if you know the data to send when creating the response
         return new JsonResponse($products);
     }

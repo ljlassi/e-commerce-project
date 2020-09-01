@@ -4,7 +4,7 @@
         <div id="response">
             <p>{{ controller_response }}</p>
         </div>
-        <h2>Featured products</h2>
+        <h2>All products</h2>
         <div v-for="product in products">
             <table class="table">
                 <tr>
@@ -19,7 +19,7 @@
 </template>
 <script>
     export default {
-        name: "home",
+        name: "list-products",
         data () {
             return {
                 products: null,
@@ -40,11 +40,11 @@
                 } finally {
                 }
             },
-            load_featured_products: function() {
+            load_products: function() {
                 try {
                     // this.isLoading = true;
                     this.axios.get(
-                        '/products/find/featured'
+                        '/products/find/all'
                     ).then(response => (this.products = response.data));
                 } catch (err) {
                     this.isError = true;
@@ -55,7 +55,7 @@
             }
         },
         mounted(){
-            this.load_featured_products();
+            this.load_products();
         }
     }
 </script>
