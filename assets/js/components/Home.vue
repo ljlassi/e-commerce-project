@@ -58,24 +58,6 @@
             this.load_featured_products();
         }
     }
-
-    /**
-     * <    <table class="table">
-     {% for product in products %}
-     <tr>
-     <td>Product: {{ product.name }}</td>
-     <td>Product price:{{ product.price }}</td>
-     <td><img src="{{ asset("images/") ~ product.imageFileName }}" alt="product image" class="img-thumbnail"></td>
-     </tr>
-     <tr>
-     <td><button v-on:click="add_to_cart({{ product.id }})" class="btn btn-primary">Add to cart</button></td>
-     </tr>
-     {% endfor %}
-     </table>
-     {% else %}
-     <h4>No featured products set yet</h4>
-     {% endif %}
-      */
 </script>
 <style scoped>
 </style>
