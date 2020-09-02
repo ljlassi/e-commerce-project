@@ -24,18 +24,18 @@
     <body>
     {% block header %}
     {% endblock %}
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-lg-2 col-md-0">
                 </div>
-                <div class="col-6 pt-5">
+                <div class="col-lg-8 col-md-12 pt-5">
                     {% block body %}{% endblock %}
                     {% block footer %}
                         <p><a href="{{ path('homepage') }}">Back to homepage</a></p>
                         <p>Copyright © 2020 Lassi Jääskeläinen</p>
                     {% endblock %}
                 </div>
-                <div class="col-3">
+                <div class="col-lg-2 col-md-0">
                 </div>
             </div>
         </div>
