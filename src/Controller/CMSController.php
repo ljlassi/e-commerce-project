@@ -82,4 +82,18 @@ class CMSController extends AbstractController
             return new Response($twig->render('admin/cms/change_banner.html.twig', ['form' => $form, 'cmsBanner' => $cmsBanner]));
         }
     }
+
+    /**
+     * Retrieve CMSBanner
+     *
+     * @Route("/cms/banner/get", name="get_cms_banner")
+     *
+     * @return Response
+     */
+
+    public function getCMSBanner() : Response {
+        $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
+            ->find(1);
+        return new Response($cmsBanner->getImageUrl());
+    }
 }

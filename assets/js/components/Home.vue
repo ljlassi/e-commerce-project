@@ -1,12 +1,18 @@
 <template>
     <div>
+        <b-container fluid>
+            <b-row>
+                <b-col cols="12" class="p-0">
+                    <img :src="'/images/' + banner_image_url" alt="Store banner image" class="text-center product-img-responsive">
+                </b-col>
+            </b-row>
         <div id="response">
             <p>{{ controller_response }}</p>
         </div>
         <h2 class="text-center pb-5">Featured products</h2>
         <b-row>
             <div v-for="(product, index) in products">
-                <b-col md="6">
+                <b-col>
                     <h3 class="text-center">{{ product.name }}</h3>
                     <p class="text-center">Price: <b>€{{ product.price }} (VAT included)</b></p>
                     <img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="text-center product-img-responsive">
@@ -14,6 +20,7 @@
                 </b-col>
             </div>
         </b-row>
+        </b-container>
     </div>
 </template>
 <script>
@@ -23,10 +30,23 @@
             return {
                 products: null,
                 controller_response: null,
-                i: 0
+                banner_image_url: null
             }
         },
         methods: {
+            get_banner_image: function () {
+                var url = '/cms/banner/get';
+                try {
+                    // this.isLoading = true;
+                    this.axios.get(
+                        url
+                    ).then(response => (this.banner_image_url = response.data));
+                } catch (err) {
+                    this.isError = true;
+                    console.log("JS error");
+                } finally {
+                }
+            },
             add_to_cart: function (id) {
                 var url = 'shopping/cart/add/?id=' + id;
                 try {
@@ -56,6 +76,7 @@
         },
         mounted(){
             this.load_featured_products();
+            this.get_banner_image();
         }
     }
 </script>

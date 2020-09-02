@@ -1,0 +1,21 @@
+{# Base template, to be extended by other templates. #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets_head %}
+    {% endblock %}
+    {% block vue_head %}
+        {{ encore_entry_link_tags('main') }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+{% endblock %}
+{% block vue_scripts %}
+    {{ encore_entry_script_tags('main') }}
+{% endblock %}
+</body>
+</html>

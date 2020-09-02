@@ -1,42 +1,17 @@
-{% extends "base.html.twig" %}
+{% extends "base_vue.html.twig" %}
 {%  block title %}
     Welcome to my project!
 {% endblock %}
-{% block scripts_head %}
-{% endblock %}
-{% block vue_head %}
-    {{ encore_entry_link_tags('main') }}
-{% endblock %}
-{% block header %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 p-0">
-                <img src="{{ asset("images/") ~ cmsBanner.imageUrl }}" alt="{{ cmsBanner.alt }}" class="img-banner">
-            </div>
-        </div>
-    </div>
-{% endblock %}
 {% block body %}
-    <h1>Welcome to Store X!</h1>
     <div id="app">
         <home>
         </home>
     </div>
-
     <p><a href="{{ path('list_products') }}">See all products</a></p>
     <p><a href="{{ path('shopping_cart') }}">Shopping cart</a></p>
     <p><a href="{{ path('admin') }}">Access admin view</a></p>
     <p><a href="{{ path('app_login') }}">Log in</a></p>
     <p><a href="{{ path('app_register') }}">Register</a></p>
     <p><a href="{{ path('app_logout') }}">Log out</a></p>
+    <p>Copyright © 2020 Lassi Jääskeläinen</p>
 {%  endblock %}
-{% block footer %}
-    Copyright © 2020 Lassi Jääskeläinen
-{% endblock %}
-{% block javascripts %}
-    <script>
-    </script>
-{% endblock %}
-{% block vue_scripts %}
-    {{ encore_entry_script_tags('main') }}
-{% endblock %}
