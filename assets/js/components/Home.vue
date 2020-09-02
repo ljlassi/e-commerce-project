@@ -3,10 +3,10 @@
         <div id="response">
             <p>{{ controller_response }}</p>
         </div>
-        <h2>Featured products</h2>
-        <div v-for="product in products">
-            <div class="row">
-                <div class="col-12">
+        <h2 class="text-center pb-5">Featured products</h2>
+        <div class="row">
+            <div v-for="(product, index) in products">
+                <div class="col-6">
                     <h3 class="text-center">{{ product.name }}</h3>
                     <p>Price: <b>€{{ product.price }} (VAT included)</b></p>
                     <img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="product-img-responsive">
@@ -22,7 +22,8 @@
         data () {
             return {
                 products: null,
-                controller_response: null
+                controller_response: null,
+                i: 0
             }
         },
         methods: {
