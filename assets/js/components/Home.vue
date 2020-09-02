@@ -10,9 +10,9 @@
             <p>{{ controller_response }}</p>
         </div>
         <h2 class="text-center pb-5">Featured products</h2>
-        <b-row>
+        <b-row class="min-height-300">
             <div v-for="(product, index) in products">
-                <b-col>
+                <b-col cols="12" lg="6" class="d-flex">
                     <h3 class="text-center">{{ product.name }}</h3>
                     <p class="text-center">Price: <b>€{{ product.price }} (VAT included)</b></p>
                     <img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="text-center product-img-responsive">
