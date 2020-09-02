@@ -4,16 +4,16 @@
             <p>{{ controller_response }}</p>
         </div>
         <h2 class="text-center pb-5">Featured products</h2>
-        <div class="row">
+        <b-row>
             <div v-for="(product, index) in products">
-                <div class="col-6">
+                <b-col md="6">
                     <h3 class="text-center">{{ product.name }}</h3>
-                    <p>Price: <b>€{{ product.price }} (VAT included)</b></p>
-                    <img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="product-img-responsive">
-                    <p><button v-on:click="add_to_cart(product.id)" class="btn btn-primary">Add to cart</button></p>
-                </div>
+                    <p class="text-center">Price: <b>€{{ product.price }} (VAT included)</b></p>
+                    <img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="text-center product-img-responsive">
+                    <p><button v-on:click="add_to_cart(product.id)" class="text-center btn btn-primary">Add to cart</button></p>
+                </b-col>
             </div>
-        </div>
+        </b-row>
     </div>
 </template>
 <script>
