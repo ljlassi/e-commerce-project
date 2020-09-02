@@ -5,11 +5,17 @@
 {% block vue_head %}
     {{ encore_entry_link_tags('main') }}
 {% endblock %}
+{% block header %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <img src="{{ asset("images/") ~ cmsBanner.imageUrl }}" alt="{{ cmsBanner.alt }}" class="img-banner">
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block body %}
     <h1>Welcome to Store X!</h1>
-    {% if cmsBanner is defined %}
-        <img src="{{ asset("images/") ~ cmsBanner.imageUrl }}" alt="{{ cmsBanner.alt }}" class="img-fluid">
-    {% endif %}
     <div id="app">
         <home>
         </home>

@@ -9,7 +9,7 @@
                 <tr>
                     <td>Product: {{ product.name }}</td>
                     <td>Product price: {{ product.price }}</td>
-                    <td><img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="img-thumbnail"></td>
+                    <td><img :src="'/images/' + product.image_file_name" alt="Image of: " :alt="product.name" class="product-img-responsive"></td>
                     <td><button v-on:click="add_to_cart(product.id)" class="btn btn-primary">Add to cart</button></td>
                 </tr>
             </table>
