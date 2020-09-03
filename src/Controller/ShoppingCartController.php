@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Service\ShoppingCartService;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Return shopping cart items as JSON.
      *
-     * @Route("shopping/cart/find", name="shopping_cart_find")
+     * @Rest\Get("shopping/cart/find", name="shopping_cart_find")
      *
      * @param Request $request
      * @param ShoppingCartService $cart_service
@@ -72,7 +73,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Add produc to shopping cart
      *
-     * @Route("shopping/cart/add", name="add_to_cart")
+     * @Rest\Get("shopping/cart/add", name="add_to_cart")
      *
      * @param Request $request
      * @param ShoppingCartService $cart_service
@@ -88,7 +89,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Remove item from shopping cart
      *
-     * @Route("/shopping/cart/remove", name="remove_from_cart")
+     * @Rest\Get("/shopping/cart/remove", name="remove_from_cart")
      */
 
     public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
