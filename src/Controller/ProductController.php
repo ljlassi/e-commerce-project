@@ -31,7 +31,7 @@ class ProductController extends AbstractController
     /**
      * Find featured products.
      *
-     * @Rest\Get("/products/find/featured", name="find_featured_products")
+     * @Rest\Get("/api/products/find/featured", name="find_featured_products")
      */
 
     public function findFeaturedProducts() : JsonResponse {
@@ -45,7 +45,7 @@ class ProductController extends AbstractController
     /**
      * Find featured products.
      *
-     * @Rest\Get("/products/find/all", name="find_all_products")
+     * @Rest\Get("/api/products/find/all", name="find_all_products")
      */
 
     public function findAllProducts() : JsonResponse {
@@ -223,7 +223,7 @@ class ProductController extends AbstractController
     /**
      * Make a product featured based on ID coming as a GET request
      *
-     * @Rest\Get("/admin/products/featured/action", name="make_product_featured")
+     * @Rest\Get("/api/admin/products/featured/action", name="make_product_featured")
      *
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -243,7 +243,7 @@ class ProductController extends AbstractController
     /**
      * Make a product not featured, based on the ID coming from a GET request.
      *
-     * @Rest\Get("/admin/products/featured/unfeature", name="unfeature_product")
+     * @Rest\Get("/api/admin/products/featured/unfeature", name="unfeature_product")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @return Response
@@ -262,7 +262,7 @@ class ProductController extends AbstractController
     /**
      * Remove product from database.
      *
-     * @Rest\Get("/admin/products/remove", name="remove_product")
+     * @Rest\Get("api/admin/products/remove", name="remove_product")
      *
      * @param EntityManagerInterface $entityManager
      * @param Request $request

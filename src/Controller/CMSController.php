@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\CMSBanner;
 use App\Form\Type\CMSBannerFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,7 +87,7 @@ class CMSController extends AbstractController
     /**
      * Retrieve CMSBanner
      *
-     * @Route("/cms/banner/get", name="get_cms_banner")
+     * @Rest\Get("/api/cms/banner/get", name="get_cms_banner")
      *
      * @return Response
      */

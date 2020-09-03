@@ -35,7 +35,7 @@
         },
         methods: {
             get_banner_image: function () {
-                var url = '/cms/banner/get';
+                var url = '/api/cms/banner/get';
                 try {
                     // this.isLoading = true;
                     this.axios.get(
@@ -48,7 +48,7 @@
                 }
             },
             add_to_cart: function (id) {
-                var url = 'shopping/cart/add/?id=' + id;
+                var url = '/api/shopping/cart/add/?id=' + id;
                 try {
                     // this.isLoading = true;
                     this.axios.get(
@@ -64,7 +64,7 @@
                 try {
                     // this.isLoading = true;
                     this.axios.get(
-                        '/products/find/featured'
+                        '/api/products/find/featured'
                     ).then(response => (this.products = response.data));
                 } catch (err) {
                     this.isError = true;

@@ -29,7 +29,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Return shopping cart items as JSON.
      *
-     * @Rest\Get("shopping/cart/find", name="shopping_cart_find")
+     * @Rest\Get("/api/shopping/cart/find", name="shopping_cart_find")
      *
      * @param Request $request
      * @param ShoppingCartService $cart_service
@@ -73,7 +73,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Add produc to shopping cart
      *
-     * @Rest\Get("shopping/cart/add", name="add_to_cart")
+     * @Rest\Get("/api/shopping/cart/add", name="add_to_cart")
      *
      * @param Request $request
      * @param ShoppingCartService $cart_service
@@ -89,7 +89,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Remove item from shopping cart
      *
-     * @Rest\Get("/shopping/cart/remove", name="remove_from_cart")
+     * @Rest\Get("api//shopping/cart/remove", name="remove_from_cart")
      */
 
     public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
