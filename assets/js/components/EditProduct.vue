@@ -40,7 +40,7 @@
                 try {
                     // this.isLoading = true;
                     this.axios.get(
-                        '/products/find/all'
+                        '/api/products/find/all'
                     ).then(response => (this.products = response.data));
                 } catch (err) {
                     this.isError = true;
@@ -50,7 +50,7 @@
                 }
             },
             removeProduct(id) {
-                var url = '/admin/products/remove/?id=' + id;
+                var url = '/api/admin/products/remove/?id=' + id;
                 try {
                     // this.isLoading = true;
                     this.axios.get(
@@ -65,7 +65,7 @@
                 }
             },
             editProduct(id) {
-                var url = '/admin/products/edit?id=' + id;
+                var url = '/api/admin/products/edit?id=' + id;
                 try {
                     this.axios.get(url).then(response => (this.editForm = response.data));
                 } catch(err) {
@@ -76,7 +76,7 @@
                 }
             },
             featureProduct(id) {
-                var url = '/admin/products/featured/action?id=' + id;
+                var url = '/api/admin/products/featured/action?id=' + id;
                 try {
                     this.axios.get(url).then(response => (this.controller_response = response.data));
                 } catch(err) {
@@ -88,7 +88,7 @@
                 }
             },
             unFeatureProduct(id) {
-                var url = '/admin/products/featured/unfeature?id=' + id;
+                var url = '/api/admin/products/featured/unfeature?id=' + id;
                 try {
                     this.axios.get(url).then(response => (this.controller_response = response.data));
                 } catch(err) {

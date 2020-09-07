@@ -32,7 +32,7 @@
                 try {
                     // this.isLoading = true;
                     this.axios.get(
-                        '/shopping/cart/find'
+                        '/api/shopping/cart/find'
                     ).then(response => (this.products = response.data));
                 } catch (err) {
                     this.isError = true;
@@ -42,7 +42,7 @@
                 }
             },
             removeFromCart(id) {
-                var url = '/shopping/cart/remove/?id=' + id;
+                var url = '/api/shopping/cart/remove/?id=' + id;
                 try {
                     // this.isLoading = true;
                     this.axios.get(

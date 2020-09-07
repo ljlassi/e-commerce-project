@@ -89,7 +89,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Remove item from shopping cart
      *
-     * @Rest\Get("api//shopping/cart/remove", name="remove_from_cart")
+     * @Rest\Get("api/shopping/cart/remove", name="remove_from_cart")
      */
 
     public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
