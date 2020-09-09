@@ -71,16 +71,16 @@ class ShoppingCartController extends AbstractController
 
 
     /**
-     * Add produc to shopping cart
+     * Add product to shopping cart
      *
-     * @Rest\Get("/api/shopping/cart/add", name="add_to_cart")
+     * @Rest\Put("/api/shopping/cart/add", name="add_to_cart")
      *
      * @param Request $request
      * @param ShoppingCartService $cart_service
      */
 
     public function addToCart(Request $request, ShoppingCartService $cart_service) : Response {
-        $product_id = $request->query->get('id');
+        $product_id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $cart_service->addToShoppingCart($product_id);
         return new Response("Added product to shopping cart");
@@ -89,7 +89,7 @@ class ShoppingCartController extends AbstractController
     /**
      * Remove item from shopping cart
      *
-     * @Rest\Get("api/shopping/cart/remove", name="remove_from_cart")
+     * @Rest\Put("api/shopping/cart/remove", name="remove_from_cart")
      */
 
     public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
