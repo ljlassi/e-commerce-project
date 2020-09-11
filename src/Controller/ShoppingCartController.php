@@ -93,7 +93,7 @@ class ShoppingCartController extends AbstractController
      */
 
     public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
-        $product_id = $request->query->get('id');
+        $product_id = $request->request->get('id');
         $cart_service->removeFromShoppingCart($product_id);
         return new Response("Removed product from shopping cart");
     }

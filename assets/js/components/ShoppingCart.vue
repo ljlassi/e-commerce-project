@@ -41,12 +41,12 @@
                     this.products = JSON.parse(this.products);
                 }
             },
-            removeFromCart(id) {
-                var url = '/api/shopping/cart/remove/?id=' + id;
+            removeFromCart(product_id) {
+                var url = '/api/shopping/cart/remove';
                 try {
                     // this.isLoading = true;
-                    this.axios.get(
-                        url
+                    this.axios.put(
+                        url, { id: product_id}
                     ).then(response => (this.controller_response = response.data));
                 } catch (err) {
                     this.isError = true;
