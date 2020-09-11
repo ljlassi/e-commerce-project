@@ -121,7 +121,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/products/edit", name="edit_product")
+     * @Route("/api/admin/products/edit", name="edit_product")
      *
      * Edit a product. Render form if form is not submitted, otherwise process form and update product information.
      *
@@ -221,9 +221,9 @@ class ProductController extends AbstractController
     }
 
     /**
-     * Make a product featured based on ID coming as a GET request
+     * Make a product featured based on ID coming in a PUT request
      *
-     * @Rest\Get("/api/admin/products/featured/action", name="make_product_featured")
+     * @Rest\Put("/api/admin/products/featured/action", name="make_product_featured")
      *
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -231,7 +231,7 @@ class ProductController extends AbstractController
      */
 
     public function makeProductFeatured(EntityManagerInterface $entityManager, Request $request) : Response {
-        $id = $request->query->get('id');
+        $id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $product = $repository->find($id);
         $product->setFeatured(true);
@@ -243,14 +243,14 @@ class ProductController extends AbstractController
     /**
      * Make a product not featured, based on the ID coming from a GET request.
      *
-     * @Rest\Get("/api/admin/products/featured/unfeature", name="unfeature_product")
+     * @Rest\Put("/api/admin/products/featured/unfeature", name="unfeature_product")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @return Response
      */
 
     public function makeProductNotFeatured(EntityManagerInterface $entityManager, Request $request) : Response {
-        $id = $request->query->get('id');
+        $id = $request->request->get('id');
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $product = $repository->find($id);
         $product->setFeatured(false);
@@ -262,7 +262,7 @@ class ProductController extends AbstractController
     /**
      * Remove product from database.
      *
-     * @Rest\Get("api/admin/products/remove", name="remove_product")
+     * @Rest\Delete("api/admin/products/remove", name="remove_product")
      *
      * @param EntityManagerInterface $entityManager
      * @param Request $request

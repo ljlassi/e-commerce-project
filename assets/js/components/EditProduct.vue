@@ -18,7 +18,7 @@
                     <td v-else><button v-on:click="featureProduct(product.id)" class="btn btn-primary">Add to featured products</button></td>
                 </tr>
                 <tr>
-                    <td><button v-on:click="editProduct(product.id)" class="btn btn-primary">Edit Product</button></td>
+                    <td><button v-on:click="loadEditProduct(product.id)" class="btn btn-primary">Edit Product</button></td>
                     <td><button v-on:click="removeProduct(product.id)" class="btn btn-danger">Remove Product</button></td>
                 </tr>
             </table>
@@ -49,11 +49,11 @@
                     this.products = JSON.parse(this.products);
                 }
             },
-            removeProduct(id) {
-                var url = '/api/admin/products/remove/?id=' + id;
+            removeProduct(product_id) {
+                var url = '/api/admin/products/remove?id=' + product_id;
                 try {
                     // this.isLoading = true;
-                    this.axios.get(
+                    this.axios.delete(
                         url
                     ).then(response => (this.controller_response = response.data));
                 } catch (err) {
@@ -64,7 +64,7 @@
                     setTimeout(function () { this.loadProducts() }.bind(this), 1500)
                 }
             },
-            editProduct(id) {
+            loadEditProduct(id) {
                 var url = '/api/admin/products/edit?id=' + id;
                 try {
                     this.axios.get(url).then(response => (this.editForm = response.data));
@@ -75,10 +75,12 @@
 
                 }
             },
-            featureProduct(id) {
-                var url = '/api/admin/products/featured/action?id=' + id;
+            featureProduct(product_id) {
+                var url = '/api/admin/products/featured/action';
                 try {
-                    this.axios.get(url).then(response => (this.controller_response = response.data));
+                    this.axios.put(
+                        url, { id: product_id}
+                    ).then(response => (this.controller_response = response.data));
                 } catch(err) {
                     this.isError = true;
                     console.log("JS error");
@@ -87,10 +89,12 @@
                     setTimeout(function () { this.loadProducts() }.bind(this), 1500)
                 }
             },
-            unFeatureProduct(id) {
-                var url = '/api/admin/products/featured/unfeature?id=' + id;
+            unFeatureProduct(product_id) {
+                var url = '/api/admin/products/featured/unfeature';
                 try {
-                    this.axios.get(url).then(response => (this.controller_response = response.data));
+                    this.axios.put(
+                        url, { id: product_id}
+                    ).then(response => (this.controller_response = response.data));
                 } catch(err) {
                     this.isError = true;
                     console.log("JS error");
