@@ -26,12 +26,12 @@
             }
         },
         methods: {
-            add_to_cart: function (id) {
-                var url = '/api/shopping/cart/add/?id=' + id;
+            add_to_cart: function (product_id) {
+                var url = '/api/shopping/cart/add';
                 try {
                     // this.isLoading = true;
-                    this.axios.get(
-                        url
+                    this.axios.put(
+                        url, { id: product_id}
                     ).then(response => (this.controller_response = response.data));
                 } catch (err) {
                     this.isError = true;
