@@ -57,7 +57,7 @@
                 }
             }
         },
-        mounted(){
+        created(){
             this.loadProducts();
         }
     }

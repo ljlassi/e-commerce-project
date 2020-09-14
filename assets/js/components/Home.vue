@@ -74,7 +74,7 @@
                 }
             }
         },
-        mounted(){
+        created(){
             this.load_featured_products();
             this.get_banner_image();
         }

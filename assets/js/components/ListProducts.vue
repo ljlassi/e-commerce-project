@@ -53,7 +53,7 @@
                 }
             }
         },
-        mounted(){
+        created(){
             this.load_products();
         }
     }
