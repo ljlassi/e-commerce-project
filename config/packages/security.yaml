@@ -17,10 +17,13 @@ security:
         main:
             anonymous: true
             lazy: true
+            stateless: true
             provider: app_user_provider
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+                    - App\Security\TokenAuthenticator
+            json_login:
+                check_path: login/authenticate
             logout:
                 path: app_logout
                 # where to redirect after logout
