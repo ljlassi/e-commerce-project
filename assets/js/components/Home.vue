@@ -2,7 +2,7 @@
     <div>
         <b-container fluid>
             <b-row>
-                <b-col cols="12" class="p-0">
+                <b-col cols="12" class="p-0 banner-img-container">
                     <img :src="'/images/' + banner_image_url" alt="Store banner image" class="text-center product-img-responsive">
                 </b-col>
             </b-row>
