@@ -16,6 +16,9 @@
                 </tr>
             </table>
         </div>
+        <div v-if="products !== false">
+            <button v-on:click="emptyCart()" class="btn btn-danger">Empty shopping cart</button>
+        </div>
     </div>
 </template>
 <script>
@@ -52,6 +55,20 @@
                     this.isError = true;
                     console.log("JS error");
                 } finally {
+                    this.products = null;
+                    setTimeout(function () { this.loadProducts() }.bind(this), 1000)
+                }
+            },
+            emptyCart() {
+                var url = '/api/shopping/cart/empty';
+                try {
+                    this.axios.delete(url).then(response => (this.controller_response = response.data));
+                }
+                catch (err) {
+                    this.isError = true;
+                    console.log("JS error");
+                }
+                finally {
                     this.products = null;
                     setTimeout(function () { this.loadProducts() }.bind(this), 1000)
                 }
