@@ -111,7 +111,9 @@ class Product implements JsonSerializable
             'price' => $this->getPrice(),
             'name' => $this->getName(),
             'featured' => $this->getFeatured(),
-            'image_file_name' => $this->getImageFileName()
+            'image_file_name' => $this->getImageFileName(),
+            'in_stock' => $this->getInStock(),
+            'description' => $this->getDescription()
         ];
     }
 
