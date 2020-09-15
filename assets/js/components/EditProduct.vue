@@ -7,7 +7,7 @@
         </div>
         <h1 v-if="products !== false">Edit products</h1>
         <h1 v-else>You have no products to edit.</h1>
-        <div v-if="products && products !== false" v-for="product in products">
+        <div v-if="products && products !== false" v-for="product in products" :key="product.id">
             <table class="table">
                 <tr>
                     <td>Amount: {{ product.items_in_cart }}</td>

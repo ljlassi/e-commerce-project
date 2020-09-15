@@ -11,7 +11,7 @@
         </div>
         <h2 class="text-center pb-5">Featured products</h2>
         <b-row align-h="center" class="min-height-300">
-            <div v-for="(product, index) in products">
+            <div v-for="(product, index) in products" :key="product.id">
                 <b-col cols="12" lg="6" class="pl-lg-5">
                     <h3 class="text-center">{{ product.name }}</h3>
                     <p class="text-center">Price: <b>€{{ product.price }} (VAT included)</b></p>

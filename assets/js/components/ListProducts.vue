@@ -4,7 +4,7 @@
             <p>{{ controller_response }}</p>
         </div>
         <h2>All products</h2>
-        <div v-for="product in products">
+        <div v-for="product in products" :key="product.id">
             <table class="table">
                 <tr>
                     <td>Product: {{ product.name }}</td>
