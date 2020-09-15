@@ -16,7 +16,7 @@
                 </tr>
             </table>
         </div>
-        <div v-if="products !== false">
+        <div v-if="products !== false && products != null">
             <button v-on:click="emptyCart()" class="btn btn-danger">Empty shopping cart</button>
         </div>
     </div>
@@ -60,17 +60,19 @@
                 }
             },
             emptyCart() {
-                var url = '/api/shopping/cart/empty';
-                try {
-                    this.axios.delete(url).then(response => (this.controller_response = response.data));
-                }
-                catch (err) {
-                    this.isError = true;
-                    console.log("JS error");
-                }
-                finally {
-                    this.products = null;
-                    setTimeout(function () { this.loadProducts() }.bind(this), 1000)
+                if (confirm("This action will empty the entire shopping cart. Are you sure?")) {
+                    var url = '/api/shopping/cart/empty';
+                    try {
+                        this.axios.delete(url).then(response => (this.controller_response = response.data));
+                    } catch (err) {
+                        this.isError = true;
+                        console.log("JS error");
+                    } finally {
+                        this.products = null;
+                        setTimeout(function () {
+                            this.loadProducts()
+                        }.bind(this), 1000)
+                    }
                 }
             }
         },
