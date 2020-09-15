@@ -35,7 +35,7 @@ class ShoppingCartController extends AbstractController
      * @param ShoppingCartService $cart_service
      */
 
-    public function returnShoppingCartAsJSON(ShoppingCartService $cart_service) : Response {
+    public function returnShoppingCartAsJSON(ShoppingCartService $cart_service) : JsonResponse {
         $in_cart = Array();
         $in_cart = $cart_service->getShoppingCart();
         if ($in_cart) {
@@ -79,7 +79,7 @@ class ShoppingCartController extends AbstractController
      * @param ShoppingCartService $cart_service
      */
 
-    public function alterCart(Request $request, ShoppingCartService $cart_service) : Response {
+    public function alterCart(Request $request, ShoppingCartService $cart_service) : JsonResponse {
         $product_id = $request->request->get('id');
         $amount = $request->request->get('amount');
         if(!isset($amount)) {
@@ -110,7 +110,7 @@ class ShoppingCartController extends AbstractController
      * @return Response
      */
 
-    public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
+    public function removeFromCart(Request $request, ShoppingCartService $cart_service) : JsonResponse {
         $product_id = $request->request->get('id');
         $cart_service->removeProductFromShoppingCart($product_id);
         return new JsonResponse("Removed product from shopping cart");
@@ -124,7 +124,7 @@ class ShoppingCartController extends AbstractController
      * @return Response
      */
 
-    public function emptyCart(ShoppingCartService $cart_service) : Response {
+    public function emptyCart(ShoppingCartService $cart_service) : JsonResponse {
         $cart_service->emptyShoppingCart();
         return new JsonResponse("Emptied shopping cart.");
     }
