@@ -73,29 +73,60 @@ class ShoppingCartController extends AbstractController
     /**
      * Add product to shopping cart
      *
-     * @Rest\Put("/api/shopping/cart/add", name="add_to_cart")
+     * @Rest\Put("/api/shopping/cart/alter", name="add_to_cart")
      *
      * @param Request $request
      * @param ShoppingCartService $cart_service
      */
 
-    public function addToCart(Request $request, ShoppingCartService $cart_service) : Response {
+    public function alterCart(Request $request, ShoppingCartService $cart_service) : Response {
         $product_id = $request->request->get('id');
-        $repository = $this->getDoctrine()->getRepository(Product::class);
-        $cart_service->addToShoppingCart($product_id);
-        return new Response("Added product to shopping cart");
+        $amount = $request->request->get('amount');
+        if(!isset($amount)) {
+            throw new \LogicException("The amount of items to add/remove was not provided to the API. Contact site administrator.");
+        }
+        if ($amount > 0) {
+            for ($i = 0; $i < $amount; $i++) {
+                // $repository = $this->getDoctrine()->getRepository(Product::class);
+                $cart_service->addToShoppingCart($product_id);
+            }
+            return new JsonResponse("Altered shopping cart.");
+        }
+        else {
+            for ($i = 0; $i > $amount; $i--) {
+                // $repository = $this->getDoctrine()->getRepository(Product::class);
+                $cart_service->removeFromShoppingCart($product_id);
+            }
+            return new JsonResponse("Altered shopping cart.");
+        }
     }
 
     /**
      * Remove item from shopping cart
      *
-     * @Rest\Put("api/shopping/cart/remove", name="remove_from_cart")
+     * @Rest\Put("/api/shopping/cart/remove", name="remove_from_cart")
+     * @param Request $request
+     * @param ShoppingCartService $cart_service
+     * @return Response
      */
 
     public function removeFromCart(Request $request, ShoppingCartService $cart_service) : Response {
         $product_id = $request->request->get('id');
-        $cart_service->removeFromShoppingCart($product_id);
-        return new Response("Removed product from shopping cart");
+        $cart_service->removeProductFromShoppingCart($product_id);
+        return new JsonResponse("Removed product from shopping cart");
+    }
+
+    /**
+     * Empty shopping cart
+     *
+     * @Rest\Delete("/api/shopping/cart/empty", name="empty_shopping_cart")
+     * @param ShoppingCartService $cart_service
+     * @return Response
+     */
+
+    public function emptyCart(ShoppingCartService $cart_service) : Response {
+        $cart_service->emptyShoppingCart();
+        return new JsonResponse("Emptied shopping cart.");
     }
 
 }

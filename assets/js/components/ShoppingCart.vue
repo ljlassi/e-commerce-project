@@ -42,11 +42,11 @@
                 }
             },
             removeFromCart(product_id) {
-                var url = '/api/shopping/cart/remove';
+                var url = '/api/shopping/cart/alter';
                 try {
                     // this.isLoading = true;
                     this.axios.put(
-                        url, { id: product_id}
+                        url, { id: product_id, amount: -1}
                     ).then(response => (this.controller_response = response.data));
                 } catch (err) {
                     this.isError = true;
