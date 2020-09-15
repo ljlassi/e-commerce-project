@@ -71,7 +71,8 @@ class ShoppingCartController extends AbstractController
 
 
     /**
-     * Add product to shopping cart
+     * Alter the amount of a product in shopping cart based on a PUT request. Either add or subtract
+     * the amount of products - or directly set the amount.
      *
      * @Rest\Put("/api/shopping/cart/alter", name="add_to_cart")
      *
@@ -82,19 +83,25 @@ class ShoppingCartController extends AbstractController
     public function alterCart(Request $request, ShoppingCartService $cart_service) : JsonResponse {
         $product_id = $request->request->get('id');
         $amount = $request->request->get('amount');
-        if(!isset($amount)) {
+        $add = $request->request->get('add');
+        if (!isset($amount) && !isset($add)) { // error on request so throw exceptions
             throw new \LogicException("The amount of items to add/remove was not provided to the API. Contact site administrator.");
         }
-        if ($amount > 0) {
+        else if (isset($amount)) { // if amount is set - set the amount of a product in shopping cart directly.
+            $cart_service->removeProductFromShoppingCart($product_id);
             for ($i = 0; $i < $amount; $i++) {
-                // $repository = $this->getDoctrine()->getRepository(Product::class);
+                $cart_service->addToShoppingCart($product_id);
+            }
+            return new JsonResponse("Altered shopping cart.");
+        }
+        else if ($add > 0) { // if add is a positive integer, add product instances to shopping cart accordingly.
+            for ($i = 0; $i < $add; $i++) {
                 $cart_service->addToShoppingCart($product_id);
             }
             return new JsonResponse("Altered shopping cart.");
         }
         else {
-            for ($i = 0; $i > $amount; $i--) {
-                // $repository = $this->getDoctrine()->getRepository(Product::class);
+            for ($i = 0; $i > $add; $i--) { // if add is a negative integer, remove product instances from shopping cart accordingly.
                 $cart_service->removeFromShoppingCart($product_id);
             }
             return new JsonResponse("Altered shopping cart.");

@@ -52,7 +52,7 @@
                 try {
                     // this.isLoading = true;
                     this.axios.put(
-                        url, { id: product_id, amount: 1}
+                        url, { id: product_id, add: 1}
                     ).then(response => (this.controller_response = response.data));
                 } catch (err) {
                     this.isError = true;
