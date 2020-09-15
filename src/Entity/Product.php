@@ -38,6 +38,16 @@ class Product implements JsonSerializable
      */
     private $image_file_name;
 
+    /**
+     * @ORM\Column(type="string", length=5000, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $in_stock;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,5 +113,29 @@ class Product implements JsonSerializable
             'featured' => $this->getFeatured(),
             'image_file_name' => $this->getImageFileName()
         ];
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getInStock(): ?int
+    {
+        return $this->in_stock;
+    }
+
+    public function setInStock(?int $in_stock): self
+    {
+        $this->in_stock = $in_stock;
+
+        return $this;
     }
 }
