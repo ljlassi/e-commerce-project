@@ -21,6 +21,7 @@
         "bootstrap": "^4.5.2",
         "bootstrap-vue": "^2.16.0",
         "node-fetch": "^2.6.1",
+        "node-forge": "^0.10.0",
         "vue-axios": "^2.1.5"
     }
 }
