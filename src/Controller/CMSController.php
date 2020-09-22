@@ -32,8 +32,8 @@ class CMSController extends AbstractController
     public function changeBanner(Environment $twig, Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
-            ->find(1);
-        if(!$cmsBanner->getImageURl()) {
+            ->findOneBy(array("role" => "frontpage"));
+        if($cmsBanner == null) {
             $cmsBanner = new CMSBanner();
         }
         $form = $this->createForm(CMSBannerFormType::class, $cmsBanner);
@@ -71,7 +71,7 @@ class CMSController extends AbstractController
 
             $form = $form->createView();
             $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
-                ->find(1);
+                ->findOneBy(array("role" => "frontpage"));
 
             return new Response($twig->render('admin/cms/change_banner.html.twig', ['form' => $form, 'cmsBanner' => $cmsBanner, 'message' => 'Successfully changed banner image.']));
 
@@ -79,7 +79,7 @@ class CMSController extends AbstractController
         else {
             $form = $form->createView();
             $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
-                ->find(1);
+                ->findOneBy(array("role" => "frontpage"));
             return new Response($twig->render('admin/cms/change_banner.html.twig', ['form' => $form, 'cmsBanner' => $cmsBanner]));
         }
     }
@@ -94,7 +94,7 @@ class CMSController extends AbstractController
 
     public function getCMSBanner() : Response {
         $cmsBanner = $this->getDoctrine()->getRepository(CMSBanner::class)
-            ->find(1);
+            ->findOneBy(array("role" => "frontpage"));
         return new Response($cmsBanner->getImageUrl());
     }
 }

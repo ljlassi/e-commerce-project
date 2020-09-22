@@ -16,4 +16,12 @@ class ProductControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testEditProductsView() : void {
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'username',
+            'PHP_AUTH_PW'   => 'pa$$word'));
+        $client->request('GET', '/admin/products/edit/view');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
 }

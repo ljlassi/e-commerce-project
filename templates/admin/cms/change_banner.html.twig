@@ -6,12 +6,14 @@
         {% endif %}
     </div>
     <h2>Change front page banner</h2>
-    <h5>Current front page banner image</h5>
-    <img src="{{ asset('/images/' ~ cmsBanner.imageUrl) }}" alt="{{ cmsBanner.alt }}" class="img-fluid">
+    {% if cmsBanner.imageUrl is defined %}
+        <h5>Current front page banner image</h5>
+        <img src="{{ asset('/images/' ~ cmsBanner.imageUrl) }}" alt="{{ cmsBanner.alt }}" class="img-fluid">
+    {% else %}
+        <h5>No banner has been set yet!</h5>
+    {% endif %}
     <h5>Change banner form</h5>
     {{ form_start(form) }}
-
-    {{ form_row(form.imageUrl) }}
     {{ form_end(form) }}
 
 {%  endblock %}
