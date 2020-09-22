@@ -6,6 +6,7 @@ namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +33,7 @@ class CMSBannerFormType extends AbstractType
             ]
         ]);
         $builder->add('alt', TextType::class);
+        $builder->add("role", HiddenType::class, [ "data" => "frontpage"]);
         $builder->add('submit', SubmitType::class);
     }
 
