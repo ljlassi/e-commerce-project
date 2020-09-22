@@ -16,6 +16,13 @@ class ProductControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    /**
+     * This unfortunately FAILS at the moment.
+     *
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+
     public function testEditProductsView() : void {
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'username',
